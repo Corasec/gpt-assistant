@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<head lang="fr">
+    {% block head %}
+
+    {% endblock %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Assistant | {% block title %}  {% endblock %}</title>
+    <!-- CSS only -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- JavaScript Bundle with Popper -->
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}" defer></script>
+    <!--Jquery with AJAX-->
+    <script type="text/javascript" src="{% static 'js/jquery-3.7.1.min.js' %}" defer></script>
+    <!--My JS-->
+    <script src="{% static 'js/assistant.js' %}" type="text/javascript" defer></script>
+    <!--My CSS-->
+    <link rel="stylesheet" href="{% static 'css/assistant.css' %}">
+
+</head>
+
+<body class="bg bg-gradient bg-light">
+    {% block body %}
+    
+    {% endblock %}
+</body>

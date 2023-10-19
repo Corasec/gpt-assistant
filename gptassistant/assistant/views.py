@@ -4,7 +4,7 @@ from assistant.models import Chat
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import openai
-
+from django.conf import settings
 
 def home(request):
     return HttpResponse("The Home Page")
@@ -18,7 +18,7 @@ def GptChat(request):
     chats = Chat.objects.all()
     return render(
         request,
-        "chat.html",
+        "assistant/assistant.html",
         {
             "chats": chats,
         },
@@ -31,15 +31,15 @@ def AjaxView(request):
         request.headers.get("X-Requested-With") == "XMLHttpRequest"
     ):  # Check if request is Ajax
         text = request.POST.get("text")
-        print(text)
+        print("text: ", text)
 
-        openai.api_key = "YOUR_API_KEY"  # Here you have to add your api key.
+        openai.api_key = settings.OPENIA_API_KEY
         res = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo", messages=[{"role": "user", "content": f"{text}"}]
+            model="gpt-3.5-turbo", messages=[{"role": "user", "content": f"{text}"}], max_tokens=1000,
         )
 
         response = res.choices[0].message["content"]
-        print(response)
+        print("txt_response: ", response)
 
         chat = Chat.objects.create(text=text, gpt=response)
 
